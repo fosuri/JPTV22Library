@@ -1,0 +1,10 @@
+#netbeans
+/build
+/dist
+/nbproject
+/test
+build.xml
+#vsc
+/.vscode
+/bin
+/lib
