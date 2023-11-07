@@ -26,7 +26,7 @@ public class App {
         this.saveManager = new SaveManager();
         this.books = saveManager.loadBooks();//инициализация поля books и сюда считаем инфу из файла
         this.readers = saveManager.loadReaders();
-        this.histories = new History[0];
+        this.histories = saveManager.loadHistories();
         this.bookManager = new BookManager(scanner);
         this.readerManager = new ReaderManager(scanner);
         this.historyManager = new HistoryManager(scanner);
@@ -72,8 +72,10 @@ public class App {
                         addHistoryToHistories(history);
                     }
                     break;
+                    
                 case 6:
                     historyManager.returnBook(histories);
+                    saveManager.saveHistories(histories);
                     break;
                 case 7:
                     historyManager.printListReadingBooks(histories);
