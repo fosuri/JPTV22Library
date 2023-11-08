@@ -9,7 +9,7 @@ import tools.InputFromKeyboard;
 
 public class HistoryManager {
 
-    private final Scanner scanner;
+    private final Scanner scanner;// scanner
     private final ReaderManager readerManager;
     private final BookManager bookManager;
 
