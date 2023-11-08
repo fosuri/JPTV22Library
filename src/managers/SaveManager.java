@@ -77,7 +77,7 @@ public class SaveManager {
         }
         return readers;
     }
-    public void saveHistories(History[] histories){
+    public void saveHistories(List<History> histories){
         FileOutputStream fos;
         ObjectOutputStream oos;
         try {
@@ -92,14 +92,14 @@ public class SaveManager {
         }
         
     }
-    public History[] loadHistories(){
-        History[] histories = new History[0];
+    public List<History> loadHistories(){
+        List<History> histories = new ArrayList<>();
         FileInputStream fis;
         ObjectInputStream ois;
         try {
             fis = new FileInputStream("histories");
             ois = new ObjectInputStream(fis);
-            histories = (History[]) ois.readObject();
+            histories = (List<History>) ois.readObject();
         } catch (FileNotFoundException ex) {
             System.out.println("File not fount");
         } catch (IOException ex) {

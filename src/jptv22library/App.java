@@ -18,7 +18,7 @@ public class App {
     //private Book[] books;
     private List<Book> books;
     private List<Reader> readers;
-    private History[] histories;
+    private List<History> histories;
     private final BookManager bookManager;
     private final ReaderManager readerManager;
     private HistoryManager historyManager;
@@ -72,10 +72,10 @@ public class App {
                 case 4:
                     readerManager.pirntListReaders(readers);
                     break;
-                case 5:
+                    case 5:
                     History history = historyManager.giveBookToReader(readers, books);
                     if(history != null){
-                        addHistoryToHistories(history);
+                        this.histories.add(history);
                     }
                     break;
                 case 6:
@@ -91,14 +91,6 @@ public class App {
         }while(repeat);
     }
 
-
-
-    private void addHistoryToHistories(History history) {
-        this.histories = Arrays.copyOf(this.histories, this.histories.length + 1);
-        this.histories[this.histories.length - 1] = history;
-        saveManager.saveHistories(histories);
-    }
-
-    
+ 
     
 }
