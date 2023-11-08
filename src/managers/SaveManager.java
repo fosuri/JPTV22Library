@@ -3,16 +3,17 @@ package managers;
 import entity.Book;
 import entity.History;
 import entity.Reader;
-
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SaveManager {
-    public void saveBooks(Book[] books){
+    public void saveBooks(List<Book> books){
         FileOutputStream fos;
         ObjectOutputStream oos;
         try {
@@ -27,14 +28,14 @@ public class SaveManager {
         }
         
     }
-    public Book[] loadBooks(){
-        Book[] books = new Book[0];
+    public List<Book> loadBooks(){
+        List<Book> books = new ArrayList<>();
         FileInputStream fis;
         ObjectInputStream ois;
         try {
             fis = new FileInputStream("books");
             ois = new ObjectInputStream(fis);
-            books = (Book[]) ois.readObject();
+            books = (List<Book>) ois.readObject();
         } catch (FileNotFoundException ex) {
             System.out.println("File not fount");
         } catch (IOException ex) {
@@ -44,7 +45,6 @@ public class SaveManager {
         }
         return books;
     }
-
     public void saveReaders(Reader[] readers){
         FileOutputStream fos;
         ObjectOutputStream oos;
@@ -58,12 +58,12 @@ public class SaveManager {
         } catch (IOException ex) {
             System.out.println("I/O error");
         }
+        
     }
-
     public Reader[] loadReaders(){
         Reader[] readers = new Reader[0];
         FileInputStream fis;
-        ObjectInputStream  ois;
+        ObjectInputStream ois;
         try {
             fis = new FileInputStream("readers");
             ois = new ObjectInputStream(fis);
@@ -77,7 +77,6 @@ public class SaveManager {
         }
         return readers;
     }
-
     public void saveHistories(History[] histories){
         FileOutputStream fos;
         ObjectOutputStream oos;
@@ -91,12 +90,12 @@ public class SaveManager {
         } catch (IOException ex) {
             System.out.println("I/O error");
         }
+        
     }
-
     public History[] loadHistories(){
         History[] histories = new History[0];
         FileInputStream fis;
-        ObjectInputStream  ois;
+        ObjectInputStream ois;
         try {
             fis = new FileInputStream("histories");
             ois = new ObjectInputStream(fis);
@@ -110,5 +109,4 @@ public class SaveManager {
         }
         return histories;
     }
-    
 }

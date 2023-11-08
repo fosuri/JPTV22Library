@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 
-public class History implements Serializable {
+public class History implements Serializable{
     private Book book;
     private Reader reader;
     private Date giveBookToReaderDate;

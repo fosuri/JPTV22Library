@@ -3,6 +3,7 @@ package managers;
 import entity.Author;
 import entity.Book;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 import tools.InputFromKeyboard;
 
@@ -39,16 +40,16 @@ public class BookManager {
         return book;
     }
 
-    public int pirntListBooks(Book[] books) {
+    public int pirntListBooks(List<Book> books) {
         int count = 0;
         System.out.println("List books: ");
-        for (int i = 0; i < books.length; i++) {
+        for (int i = 0; i < books.size(); i++) {
             System.out.printf("%d. %s. %d. %s. In stock: %d%n",
                     i+1,
-                    books[i].getTitle(),
-                    books[i].getPublishedYear(),
-                    Arrays.toString(books[i].getAuthors()),
-                    books[i].getCount()
+                    books.get(i).getTitle(),
+                    books.get(i).getPublishedYear(),
+                    Arrays.toString(books.get(i).getAuthors()),
+                    books.get(i).getCount()
             );
             count++;
         }
