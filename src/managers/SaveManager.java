@@ -45,7 +45,7 @@ public class SaveManager {
         }
         return books;
     }
-    public void saveReaders(Reader[] readers){
+    public void saveReaders(List<Reader> readers){
         FileOutputStream fos;
         ObjectOutputStream oos;
         try {
@@ -60,14 +60,14 @@ public class SaveManager {
         }
         
     }
-    public Reader[] loadReaders(){
-        Reader[] readers = new Reader[0];
+    public List<Reader> loadReaders(){
+        List<Reader> readers = new ArrayList<>();
         FileInputStream fis;
         ObjectInputStream ois;
         try {
             fis = new FileInputStream("readers");
             ois = new ObjectInputStream(fis);
-            readers = (Reader[]) ois.readObject();
+            readers = (List<Reader>) ois.readObject();
         } catch (FileNotFoundException ex) {
             System.out.println("File not fount");
         } catch (IOException ex) {

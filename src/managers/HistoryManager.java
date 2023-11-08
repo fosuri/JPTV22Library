@@ -21,13 +21,13 @@ public class HistoryManager {
         
     }
 
-    public History giveBookToReader(Reader[] readers, List<Book> books) {
+    public History giveBookToReader(List<Reader> readers, List<Book> books) {
         System.out.println("------------- Give the book to the reader ----------------");
         History history = new History();
         /*
          * 1. Выводим нумерованный список читателей
          * 2. Просим ввести номер читателя
-         * 3. получим по индексу читателя из массива читателей
+         * 3. получим по индексу читателя из списка читателей
          * 4. Инициируем поле в history.setReader(reader)
          * 5-9. Повторить действия 1-4 с книгой
          * 10. Инициируем дату выдачи книги тукущим временем
@@ -35,7 +35,7 @@ public class HistoryManager {
         int countReadersInList = readerManager.pirntListReaders(readers);
         System.out.print("Enter number reader: ");
         int readerNumber = InputFromKeyboard.inputNumberFromRange(1, countReadersInList);
-        history.setReader(readers[readerNumber-1]);
+        history.setReader(readers.get(readerNumber-1));
 
         int countBooksInList = bookManager.pirntListBooks(books);
         System.out.print("Enter number book: ");
