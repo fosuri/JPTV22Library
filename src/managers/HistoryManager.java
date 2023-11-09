@@ -4,8 +4,14 @@ import entity.Book;
 import entity.History;
 import entity.Reader;
 import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import static java.util.Map.entry;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 import tools.InputFromKeyboard;
 
 public class HistoryManager {
@@ -24,14 +30,7 @@ public class HistoryManager {
     public History giveBookToReader(List<Reader> readers, List<Book> books) {
         System.out.println("------------- Give the book to the reader ----------------");
         History history = new History();
-        /*
-         * 1. Выводим нумерованный список читателей
-         * 2. Просим ввести номер читателя
-         * 3. получим по индексу читателя из массива читателей
-         * 4. Инициируем поле в history.setReader(reader)
-         * 5-9. Повторить действия 1-4 с книгой
-         * 10. Инициируем дату выдачи книги тукущим временем
-         */
+        
         int countReadersInList = readerManager.pirntListReaders(readers);
         System.out.print("Enter number reader: ");
         int readerNumber = InputFromKeyboard.inputNumberFromRange(1, countReadersInList);
@@ -44,17 +43,17 @@ public class HistoryManager {
             history.setBook(books.get(bookNumber-1));
             books.get(bookNumber-1).setCount(books.get(bookNumber-1).getCount()-1);
             history.setGiveBookToReaderDate(new GregorianCalendar().getTime());
+            return history;
         }else{
             System.out.println("All books are read");
             return null;
         }
-        return history;
     }
 
     public void returnBook(List<History> histories) {
         System.out.println("-------- Return book to library ---------");
-        int countBooksInList;
-        if((countBooksInList = this.printListReadingBooks(histories))<1){
+        
+        if((this.printListReadingBooks(histories))<1){
             System.out.println("Not books");
             return;
         }
@@ -88,6 +87,38 @@ public class HistoryManager {
         }
         return countReadingBooks;
     }
+
+    public void printRankingOfBooksBeingRead(List<History> histories) {
+        Map<Book,Integer> mapBooks = new HashMap<>();
+        for (int i = 0; i < histories.size(); i++) {
+            Book book = histories.get(i).getBook();
+            if(mapBooks.containsKey(book)){
+                mapBooks.put(book,mapBooks.get(book) + 1);
+            }else{
+                mapBooks.put(book,1);
+            }
+        }
+        Map<Book, Integer> sortedMap = mapBooks.entrySet()
+            .stream()
+            .sorted(Map.Entry.<Book, Integer>comparingByValue().reversed())
+            .collect(Collectors.toMap(
+                Map.Entry::getKey, 
+                Map.Entry::getValue, 
+                (oldValue, newValue) -> oldValue, 
+                LinkedHashMap::new));
+        System.out.println("Ranking of books being read:");
+        int n=1;
+        for (Map.Entry entry : sortedMap.entrySet()) {
+            System.out.printf("%d. %s: %d%n",
+                    n,
+                    ((Book)entry.getKey()).getTitle(),
+                    entry.getValue()
+            );
+            n++;
+        }
+    }
+
+    
     
     
 }

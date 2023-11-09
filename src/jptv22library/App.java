@@ -15,7 +15,6 @@ import tools.InputFromKeyboard;
 
 public class App {
     private final Scanner scanner;
-    //private Book[] books;
     private List<Book> books;
     private List<Reader> readers;
     private List<History> histories;
@@ -27,7 +26,6 @@ public class App {
     public App() {
         this.scanner = new Scanner(System.in);
         this.saveManager = new SaveManager();
-        //this.books = saveManager.loadBooks();//инициализация поля books и сюда считаем инфу из файла
         this.books = saveManager.loadBooks();
         this.readers = saveManager.loadReaders();
         this.histories = saveManager.loadHistories();
@@ -35,10 +33,7 @@ public class App {
         this.readerManager = new ReaderManager(scanner);
         this.historyManager = new HistoryManager(scanner);
     }
-    
-    
-    
-    
+
     void run() {
         boolean repeat = true;
         System.out.println("------ Library ------");
@@ -52,8 +47,10 @@ public class App {
             System.out.println("5. Give the book to the reader");
             System.out.println("6. Return book");
             System.out.println("7. Print list readed books");
+            System.out.println("8. Ranking of books being read");
+            System.out.println("9. Most Reading Reader");
             System.out.print("Enter number task: ");
-            int task = InputFromKeyboard.inputNumberFromRange(0,7);
+            int task = InputFromKeyboard.inputNumberFromRange(0,9);
             switch (task) {
                 case 0:
                     repeat = false;
@@ -64,7 +61,7 @@ public class App {
                     break;
                 case 2:
                     readers.add(readerManager.addReader());
-                    saveManager.saveReaders(this.readers);
+                    saveManager.saveReaders(readers);
                     break;
                 case 3:
                     bookManager.pirntListBooks(books);
@@ -72,10 +69,11 @@ public class App {
                 case 4:
                     readerManager.pirntListReaders(readers);
                     break;
-                    case 5:
+                case 5:
                     History history = historyManager.giveBookToReader(readers, books);
                     if(history != null){
                         this.histories.add(history);
+                        saveManager.saveHistories(histories);
                     }
                     break;
                 case 6:
@@ -85,12 +83,19 @@ public class App {
                 case 7:
                     historyManager.printListReadingBooks(histories);
                     break;
+                case 8:
+                    //System.out.println("Implementation expected");
+                    historyManager.printRankingOfBooksBeingRead(this.histories);
+                    break;
+                case 9:
+                    System.out.println("Implementation expected");
+                    break;
                 default:
                     System.out.println("Select number from list tasks!");
             }
+            System.out.println("-------------------------");
         }while(repeat);
     }
 
- 
     
 }
