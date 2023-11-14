@@ -116,9 +116,5 @@ public class HistoryManager {
             );
             n++;
         }
-    }
-
-    
-    
-    
+    }   
 }

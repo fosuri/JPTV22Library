@@ -56,4 +56,14 @@ public class BookManager {
         return count;
     }
     
+    public void addCopyOfExistingBookInLibrary(List<Book> books){
+        this.pirntListBooks(books);
+        System.out.print("Enter the book number to add copies: ");
+        int bookNumber = InputFromKeyboard.inputNumberFromRange(1, books.size());
+        System.out.print("Enter quantity to add: ");
+        int copyNumber = InputFromKeyboard.inputNumberFromRange(1, 10);
+        books.get(bookNumber-1).setQuantity(books.get(bookNumber-1).getQuantity() + copyNumber);
+        books.get(bookNumber-1).setCount(books.get(bookNumber-1).getCount() + copyNumber);
+        
+    }
 }
