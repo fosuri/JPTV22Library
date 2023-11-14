@@ -39,5 +39,15 @@ public class InputFromKeyboard {
         return number;
     }
     
-    
+    public static String inputSympolYesOrNO(){
+        Scanner scanner = new Scanner(System.in);
+        String sybmol = "n";
+        do{
+            sybmol = scanner.nextLine();
+            if(sybmol.equals("n") || sybmol.equals("y")){
+                return sybmol;
+            }
+            System.out.println("For continue press \"y\", exit press \"n\": ");
+        }while(true);
+    }
 }

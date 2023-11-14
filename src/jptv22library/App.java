@@ -52,6 +52,11 @@ public class App {
             System.out.println("10. Most Reading Reader");
             System.out.print("Enter number task: ");
             int task = InputFromKeyboard.inputNumberFromRange(0,9);
+            System.out.println("Selected task is "+task+". Are you sure? Y/N");
+            String continueRun = InputFromKeyboard.inputSympolYesOrNO();
+            if(continueRun.equals("n")){
+                continue;
+            }
             switch (task) {
                 case 0:
                     repeat = false;
